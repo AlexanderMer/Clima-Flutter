@@ -1,3 +1,4 @@
+import 'package:clima/services/location.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -10,14 +11,16 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
   @override
   void initState() {
-    getGeoLocation();
+    getPosition();
     super.initState();
   }
 
-  void getGeoLocation() async {
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.low);
-    print(position);
+  void getPosition() async
+  {
+    var location = Location();
+    await location.getGeoLocation();
+    print(location.latitude);
+    print(location.longitude);
   }
 
   @override
@@ -26,7 +29,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
       body: Center(
         child: RaisedButton(
           onPressed: () {
-            getGeoLocation();
+
           },
           child: Text('Get Location'),
         ),
