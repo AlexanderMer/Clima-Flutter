@@ -1,4 +1,8 @@
 class WeatherModel {
+  double temperature;
+  int condition;
+  String cityName;
+
   String getWeatherIcon(int condition) {
     if (condition < 300) {
       return '🌩';

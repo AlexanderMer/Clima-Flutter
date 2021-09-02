@@ -74,3 +74,7 @@ class _LocationScreenState extends State<LocationScreen> {
     );
   }
 }
+
+// weather.cityName = weatherJson['name'];
+// weather.condition = weatherJson['weather'][0]['id'];
+// weather.temperature = weatherJson['main']['temp'];
