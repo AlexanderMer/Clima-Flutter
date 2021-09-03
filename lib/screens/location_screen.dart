@@ -1,12 +1,35 @@
+import 'package:clima/services/weather.dart';
 import 'package:flutter/material.dart';
 import 'package:clima/utilities/constants.dart';
 
 class LocationScreen extends StatefulWidget {
+
+  LocationScreen({this.weatherData});
+
+  final weatherData;
+
   @override
   _LocationScreenState createState() => _LocationScreenState();
 }
 
 class _LocationScreenState extends State<LocationScreen> {
+
+  WeatherModel weather;
+
+  @override
+  void initState() {
+    updateUI(widget.weatherData);
+    super.initState();
+  }
+
+  void updateUI(weatherJson)
+  {
+    this.weather = WeatherModel();
+    this.weather.cityName = weatherJson['name'];
+    this.weather.condition = weatherJson['weather'][0]['id'];
+    this.weather.temperature = double.parse(((weatherJson['main']['temp'] as double)).toStringAsFixed(1)); // there isn't a better way to round in Dart :/
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,11 +72,11 @@ class _LocationScreenState extends State<LocationScreen> {
                 child: Row(
                   children: <Widget>[
                     Text(
-                      '32°',
+                      this.weather.temperature.toString(),
                       style: kTempTextStyle,
                     ),
                     Text(
-                      '☀️',
+                      weather.weatherIcon,
                       style: kConditionTextStyle,
                     ),
                   ],
@@ -62,7 +85,7 @@ class _LocationScreenState extends State<LocationScreen> {
               Padding(
                 padding: EdgeInsets.only(right: 15.0),
                 child: Text(
-                  "It's 🍦 time in San Francisco!",
+                  "${weather.message} in ${weather.cityName}!",
                   textAlign: TextAlign.right,
                   style: kMessageTextStyle,
                 ),
@@ -74,7 +97,3 @@ class _LocationScreenState extends State<LocationScreen> {
     );
   }
 }
-
-// weather.cityName = weatherJson['name'];
-// weather.condition = weatherJson['weather'][0]['id'];
-// weather.temperature = weatherJson['main']['temp'];

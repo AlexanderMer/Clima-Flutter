@@ -3,7 +3,7 @@ class WeatherModel {
   int condition;
   String cityName;
 
-  String getWeatherIcon(int condition) {
+  String get weatherIcon {
     if (condition < 300) {
       return '🌩';
     } else if (condition < 400) {
@@ -23,12 +23,12 @@ class WeatherModel {
     }
   }
 
-  String getMessage(int temp) {
-    if (temp > 25) {
+  String get message {
+    if (temperature > 25) {
       return 'It\'s 🍦 time';
-    } else if (temp > 20) {
+    } else if (temperature > 20) {
       return 'Time for shorts and 👕';
-    } else if (temp < 10) {
+    } else if (temperature < 10) {
       return 'You\'ll need 🧣 and 🧤';
     } else {
       return 'Bring a 🧥 just in case';

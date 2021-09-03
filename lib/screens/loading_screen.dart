@@ -27,13 +27,15 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
     var openWeatherApiKey = '5c732e318078556a67988a46a23f8b01';
     var url =
-        "https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=$openWeatherApiKey";
+        "https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=$openWeatherApiKey&units=metric";
 
     final weatherJson = await NetworkHelper.getData(url);
     final weather = WeatherModel();
 
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => LocationScreen()));
+        context, MaterialPageRoute(builder: (context) => LocationScreen(
+      weatherData: weatherJson
+    )));
   }
 
   @override
